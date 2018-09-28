@@ -50,13 +50,22 @@ void Arvore::incluir(Info * i)
 				}
 		}
 		achou = false;
-		BalancearTudo(raiz, i);
+		NoArvore* no = raiz;
+
+		while (i->compareTo(no->getInfo()) != 0)
+		{
+			Balancear(no);
+			if (i->compareTo(no->getInfo()) < 0)
+				no = no->esquerdo;
+			else
+				no = no->direito;
+		}
 	}
 }
 
-void Arvore::preorder()
+void Arvore::print()
 {
-	preorder(raiz, 0);
+	preorder(raiz);
 }
 
 void Arvore::preorder(NoArvore * no, int indent)
@@ -92,18 +101,6 @@ void Arvore::Balancear(NoArvore* no)
 			rotacaoDuplaDireita(*no);
 		else
 			rotacaoDireita(*no);
-	}
-}
-
-void Arvore::BalancearTudo(NoArvore * no, Info* i)
-{
-	while (i->compareTo(no->getInfo()) != 0)
-	{
-		Balancear(no);
-		if (i->compareTo(no->getInfo()) < 0)
-			no = no->esquerdo;
-		else
-			no = no->direito;
 	}
 }
 
