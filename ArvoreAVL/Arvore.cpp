@@ -63,7 +63,7 @@ void Arvore::incluir(Info * i)
 	}
 }
 
-void Arvore::print()
+void Arvore::preorder()
 {
 	preorder(raiz);
 }
@@ -72,16 +72,22 @@ void Arvore::preorder(NoArvore * no, int indent)
 {
 	if (no != NULL) 
 	{
-		if (indent) 
+		/*if (indent) 
 			for (int i = 0; i < indent; i++)
-				std::cout << " ";
+				std::cout << " ";*/
 
 		no->getInfo()->print(std::cout);
-
-		if (no->esquerdo != NULL) 
+		std::cout << "(";
+		if (no->esquerdo != NULL)
 			preorder(no->esquerdo, indent + 1);
+		else
+			std::cout << " ";
+		std::cout << ",";
 		if (no->direito != NULL) 
 			preorder(no->direito, indent + 1);
+		else
+			std::cout << " ";
+		std::cout << ")";
 	}
 }
 

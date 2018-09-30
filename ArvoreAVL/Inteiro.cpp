@@ -23,7 +23,7 @@ int Inteiro::compareTo(Info* i)
 
 ostream & Inteiro::print(ostream & os)
 {
-	os << inteiro << "\n";
+	os << inteiro;
 	return os; 
 }
 

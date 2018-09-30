@@ -7,7 +7,7 @@ public:
 	Arvore();
 	~Arvore();
 	void incluir(Info*);
-	void print();
+	void preorder();
 	void Balancear(NoArvore*);
 
 private:
