@@ -1,1 +1,4 @@
-.exe
+*.bat
+*.exe
+Debug/**
+.gitignore
