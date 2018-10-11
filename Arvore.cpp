@@ -57,6 +57,7 @@ void Arvore<T>::incluir(T i)
 			if (i < no->getInfo())
 				no = no->esquerdo;
 			else
+			if(i > no->getInfo())
 				no = no->direito;
 		}
 	}
