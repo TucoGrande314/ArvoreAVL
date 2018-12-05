@@ -14,6 +14,8 @@ class NoArvore
 
         T getInfo();
         void setInfo(T);
+        void excluir(T);
+        bool ehNo();
     private:
         T info;
 };
