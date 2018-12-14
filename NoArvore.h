@@ -14,11 +14,11 @@ class NoArvore
 
         T getInfo();
         void setInfo(T);
-        void excluir(T);
-        bool ehNo();
+
+
     private:
         T info;
 };
 
-#include "NoArvore.cpp"
+#include "NoArvore.inl"
 #endif // NOARVORE_H

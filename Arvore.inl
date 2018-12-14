@@ -12,6 +12,7 @@ Arvore<T>::Arvore()
 template <class T>
 Arvore<T>::~Arvore()
 {
+    cls(raiz);
 }
 
 template <class T>
@@ -61,6 +62,80 @@ void Arvore<T>::incluir(T i)
 				no = no->direito;
 		}
 	}
+}
+template <class T>
+void Arvore<T>::excluir(T i)
+{
+    if(this->raiz== NULL)
+        throw "Is not possible to remove an item from an empty tree";
+    else
+    {
+        NoArvore<T>* ant = NULL;
+        NoArvore<T>* atual = raiz;
+        bool achou = false;
+        while(!achou)
+            if(i == atual->getInfo())
+            {
+                if(atual == raiz)
+                    raiz = excluir(atual);
+                else
+                {
+                    if(ant->direito == atual)
+                        ant->direito = excluir(atual);
+                    else
+                        ant->esquerdo = excluir(atual);
+                }
+                achou = true;
+            }
+            else
+            {
+                ant = atual;
+                if(i < atual->getInfo())
+                    atual = atual->esquerdo;
+                else
+                    atual = atual->direito;
+            }
+
+    }
+    NoArvore<T>* no = raiz;
+    while (no != NULL)
+    {
+			Balancear(no);
+			if (i < no->getInfo())
+				no = no->esquerdo;
+			else
+			if(i > no->getInfo())
+				no = no->direito;
+	}
+}
+
+template<class T>
+NoArvore<T>* Arvore<T>::excluir(NoArvore<T>* no)
+{
+    NoArvore<T>* no1;
+    NoArvore<T>* no2;
+
+    if(no->esquerdo == NULL)
+    {
+        no2 = no->direito;
+        delete no;
+        return no2;
+    }
+    no1 = no;
+    no2 = no->esquerdo;
+    while(no2->direito != NULL)
+    {
+        no1 = no2;
+        no2 = no2->direito;
+    }
+    if(no1 != no)
+    {
+        no1->direito = no2->esquerdo;
+        no2->esquerdo = no->esquerdo;
+    }
+    no2->direito = no->direito;
+    delete no;
+    return no2;
 }
 
 template <class T>
@@ -170,4 +245,15 @@ template <class T>
 int Arvore<T>::Equilibrio(NoArvore<T>* no)
 {
 	return Altura(no->direito) - Altura(no->esquerdo);
+}
+
+template<class T>
+void Arvore<T>::cls(NoArvore<T>* no)
+{
+    if(no->esquerdo != NULL)
+        cls(no->esquerdo);
+    if(no->direito != NULL)
+        cls(no->direito);
+
+    delete no;
 }
