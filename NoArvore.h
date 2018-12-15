@@ -7,13 +7,14 @@ class NoArvore
     public:
         NoArvore();
         NoArvore(T);
+        NoArvore(const NoArvore<T>&);
         ~NoArvore();
 
         NoArvore<T>* esquerdo;
         NoArvore<T>* direito;
 
         T getInfo();
-        void setInfo(T);
+        //void setInfo(T);
 
 
     private:

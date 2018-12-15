@@ -1,12 +1,20 @@
 #include <iostream>
 #include <cstdlib>
 #include <string>
+#include <stdio.h>
+#define COUNT 10
+
 using namespace std;
 
 template <class T>
 Arvore<T>::Arvore()
 {
 	raiz = NULL;
+}
+template <class T>
+Arvore<T>::Arvore(const Arvore<T>& arvore)
+{
+    this->raiz = new NoArvore<T>(arvore.raiz);
 }
 
 template <class T>
@@ -139,12 +147,6 @@ NoArvore<T>* Arvore<T>::excluir(NoArvore<T>* no)
 }
 
 template <class T>
-void Arvore<T>::preorder()
-{
-	preorder(raiz);
-}
-
-template <class T>
 void Arvore<T>::preorder(NoArvore<T>* no)
 {
 	if (no != NULL)
@@ -162,6 +164,34 @@ void Arvore<T>::preorder(NoArvore<T>* no)
 			std::cout << " ";
 		std::cout << ")";
 	}
+}
+template <class T>
+void Arvore<T>::preorder()
+{
+	preorder(raiz);
+}
+
+template<class T>
+void Arvore<T>::print2D(NoArvore<T>* no, int space)
+{
+    if(no == NULL)
+        return;
+    space += COUNT;
+
+    print2D(no->direito, space);
+
+    cout << "\n";
+    for(int i = COUNT; i < space; i++)
+        cout << " ";
+    cout << no->getInfo();
+
+    print2D(no->esquerdo, space);
+}
+
+template<class T>
+void Arvore<T>::print2D()
+{
+    print2D(raiz, 0);
 }
 
 template <class T>
@@ -256,4 +286,27 @@ void Arvore<T>::cls(NoArvore<T>* no)
         cls(no->direito);
 
     delete no;
+}
+
+template <class T>
+NoArvore<T>* Arvore<T>::get(T i)
+{
+    NoArvore<T>* atual = raiz;
+    bool achou = false;
+    while(!achou)
+    {
+        if(i < atual->getInfo())
+            atual = atual->esquerdo;
+        else
+        if(i > atual->getInfo())
+            atual = atual->direito;
+        else
+        if(i == atual->direito)
+            achou = true;
+        else
+            return NULL;
+    }
+
+    NoArvore<T>* ret = new NoArvore<T>(*atual);
+    return ret;
 }

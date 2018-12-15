@@ -7,12 +7,15 @@ class Arvore
 {
 public:
 	Arvore();
+	Arvore(const Arvore<T>&);
 	~Arvore();
 	void incluir(T);
 	void excluir(T);
 	void preorder();
+	void inorder();
+    void print2D();
 	void Balancear(NoArvore<T>*);
-
+    NoArvore<T>* get(T);
 private:
 	NoArvore<T>* raiz;
 	int Altura(NoArvore<T>*);
@@ -25,7 +28,10 @@ private:
 	void rotacaoDuplaDireita(NoArvore<T>&);
 
     NoArvore<T>* excluir(NoArvore<T>*);
-	void preorder(NoArvore<T>* p);
+
+	void preorder(NoArvore<T>*);
+	void inorder(NoArvore<T>*);
+	void print2D(NoArvore<T>*, int);
 };
 
 #include "Arvore.inl"
